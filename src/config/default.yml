@@ -20,6 +20,7 @@ resolvers:
   space-before-colon: 1
   space-between-parens: 1
   hex-length: 1
+  mixins-before-declarations: 1
   empty-line-between-blocks: 1
   url-quotes: 1
   zero-unit: 1

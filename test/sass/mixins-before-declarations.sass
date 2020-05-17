@@ -1,0 +1,20 @@
+.rule-with-one
+  display: block
+
+  @include my-new-mixin-one
+
+
+.rule-with-two
+  @include my-new-mixin-two
+  display: block
+
+  @include my-another-mixin-two
+
+  .rule-with-two-one
+      @include my-another-mixin-two-one
+      @include my-another-mixin-two-two
+      display: none
+
+      font-size: 10px
+
+      @include my-another-mixin-two-three
