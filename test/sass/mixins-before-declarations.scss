@@ -1,14 +1,12 @@
 .rule-one {
+  @include my-new-mixin-one;
   display: block;
-
-  @include my-new-mixin-one
 }
 
 .rule-two {
-  @include my-new-mixin-two
   display: block;
   font-size: 10px;
-
   font-style: italic;
-  @include my-another-mixin-two
+  @include my-new-mixin-two;
+  @include my-another-mixin-two;
 }

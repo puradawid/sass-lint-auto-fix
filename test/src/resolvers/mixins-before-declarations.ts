@@ -1,6 +1,8 @@
 import { ValidFileType } from '@src/types';
 import { detect, lint, resolveFirst } from '@test/helpers/resolve';
 
+import { dedent } from '@test/helpers/utils';
+
 describe('mixins-before-declarations', () => {
   describe('- scss', () => {
     const options = { 'mixins-before-declarations': 1 };
@@ -14,6 +16,22 @@ describe('mixins-before-declarations', () => {
 
       expect(preResolve.warningCount).toBe(2);
       expect(postResolve.warningCount).toBe(0);
+    });
+
+    it('keeps indentation', () => {
+      const { ast: postResolve } = resolveFirst(filename, options);
+
+      expect(postResolve.toString()).toContain(
+        dedent(`
+          .rule-two {
+            @include my-new-mixin-two;
+            @include my-another-mixin-two;
+            display: block;
+            font-size: 10px;
+            font-style: italic;
+          }
+      `),
+      );
     });
   });
 
@@ -29,6 +47,18 @@ describe('mixins-before-declarations', () => {
 
       expect(preResolve.warningCount).toBe(3);
       expect(postResolve.warningCount).toBe(0);
+    });
+
+    it('keeps indentation', () => {
+      const { ast: postResolve } = resolveFirst(filename, options);
+
+      expect(postResolve.toString()).toContain(
+        dedent(`
+        .rule-with-one
+          @include my-new-mixin-one
+          display: block
+      `),
+      );
     });
   });
 });
